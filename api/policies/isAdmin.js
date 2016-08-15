@@ -3,11 +3,11 @@ module.exports = function isAdmin(req, res, next) {
   // If the user agent DOES NOT have a user id stored in their session...
   if (!req.session.userId) {
     if (req.wantsJSON) {
-      return res.forbidden('You are not permitted to perform this action.');
+      return res.forbidden('You are not permitted to perform this action. is admin page');
     }
     return res.redirect('/');
   }
-  
+
   // Search for a user based upon the user record id in the session
   User.findOne(req.session.userId).exec(function(err, foundUser){
 
@@ -18,7 +18,7 @@ module.exports = function isAdmin(req, res, next) {
     // with a User record in the database...
     if (!foundUser) {
       if (req.wantsJSON) {
-        return res.forbidden('You are not permitted to perform this action.');
+        return res.forbidden('You are not permitted to perform this action. is addmin page below');
       }
       return res.redirect('/');
     }
@@ -27,10 +27,10 @@ module.exports = function isAdmin(req, res, next) {
     if (foundUser.admin) {
       return next();
 
-    // Respond with forbidden or redirect based upon the user-agent requirements  
+    // Respond with forbidden or redirect based upon the user-agent requirements
     } else {
       if (req.wantsJSON) {
-        return res.forbidden('You are not permitted to perform this action.');
+        return res.forbidden('You are not permitted to perform this action. is admin page below below');
       }
       return res.redirect('/');
     }
